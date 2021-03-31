@@ -1,0 +1,12 @@
+d8a6e50084c8908d97c7218e45e9e1b7 *DESCRIPTION
+37e337322c0872ec7bd1522b0380d865 *NAMESPACE
+589e3d44ffd3c4bfccb787e5aafa9dbb *R/estimation_NonParRolCor.R
+dd99fc114726f1b46df81a42b78358e7 *R/heatmap_NonParRolCor.R
+0d9913676d9238b6d48f0fa99786bbb9 *build/partial.rdb
+32acaa6d95421785462f10227676307c *data/ecodata.rda
+f1c6f99fc0d0da8a1cd4d7992e3859dc *data/syntheticdata.rda
+430ae4658ed5dedbac7be3b2ebbb7f94 *man/NonParRolCor-package.Rd
+4e56845d16519007a9e8773c425fc0d6 *man/ecodata.Rd
+3e02c69eeddc3c78b52b6c226f570aae *man/estimation_NonParRolCor.Rd
+ea7f733a57352b186cacbdd9102f6d76 *man/heatmap_NonParRolCor.Rd
+2c4c86d3aac98681a99c2e0ec00b4bf5 *man/syntheticdata.Rd
