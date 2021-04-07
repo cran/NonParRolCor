@@ -83,9 +83,9 @@ Telford, R.: Running correlations -- running into problems. (2013). <URL: \cr
  # WARNING: MCSim=5, it's just to test this example! 
  MCSim <- 2 
  Np    <- 2  # Number of cores 
- X_Y <- estimation_NonParRolCor(syntheticdata, CorMethod="pearson", 
-                   typewidthwin=TYPEWIDTHWIN, widthwin_1=19, 
-                   widthwin_N=61, Align="center", 
+ X_Y <- estimation_NonParRolCor(syntheticdata[1:350,], CorMethod="pearson", 
+                   typewidthwin=TYPEWIDTHWIN, widthwin_1=29, 
+                   widthwin_N=51, Align="center", 
                    rmltrd=TRUE, Scale=TRUE, MCSim=MCSim, Np=Np)
  }
 

@@ -1,10 +1,11 @@
 ########################################################################
 #:: "heatmap_NonParRolCor" function from the R package NonParRolCor    #
 ########################################################################
-#:: The function "heatmap_NonParRolCor" plot a heat map of the rolling #
-#:: window correlation coefficients and its statistical significance   #
-#:: that is estimated through a non-parametric computing-intensive     # 
-#:: method. Methods inspired/derived from R. Telford (2013):           #        
+#:: The function "heatmap_NonParRolCor" plot the time series under     #
+#:: study and a heat map of the rolling window correlation coefficients#
+#:: and its statistical significance that is estimated through a       #
+#:: non-parametric computing-intensive method. Methods inspired/derived#
+#:: from R. Telford (2013):                                            #        
 #:: <https://quantpalaeo.wordpress.com/2013/01/04//>                   #
 #:: and Polanco-Martinez, J.M. (2020), Ecological Informatics 60,      #
 #:: 101163, https://doi.org/10.1016/j.ecoinf.2020.101163	       #
@@ -75,7 +76,7 @@
  #               dim(inputdata)[1], i.e. number of datums in inputdata) 
  # 		 when the option typewidthwin="PARTIAL" is selected.
  #######################################################################
- # Variables that are not strictly necessary to define:
+ # Parameters that are not strictly necessary to define:
  # 8.  varX:    Name of the first variable, e.g. "X". 
  # 9.  varY:    name of the second variable, e.g. "Y". 
  # 10. coltsX:  The color to be used to plot the first (independent) 
@@ -113,13 +114,13 @@
  #---------------------------------------------------------------------#
  #         Transforming the input data to time series objects
  #---------------------------------------------------------------------#
- Deltat <- diff(inputdata[,1]) 
  NL     <- dim(inputdata)[1]
- NP     <- dim(inputdata)[2]
- ts1    <- ts(inputdata[,2], start=inputdata[1,1], end=inputdata[NL,1], 
-     	      deltat=unique(Deltat)) 
- ts2    <- ts(inputdata[,3:NP], start=inputdata[1,1], end=inputdata[NL,1], 
-	      deltat=unique(Deltat)) 
+ freq   <- length((inputdata[,1]))/length(unique(inputdata[,1]))
+ # Please note that we scale (standardized/normalized) 
+ ts1    <- ts(scale(inputdata[,2]), start=c(inputdata[1,1],1), 
+              end=c(inputdata[NL,1],freq), deltat=1/freq) 
+ ts2    <- ts(scale(inputdata[,3]), start=c(inputdata[1,1],1), 
+              end=c(inputdata[NL,1],freq), deltat=1/freq)
  #
  time.runcor <- time(ts1) 
  Nrun        <- length(time.runcor) 
@@ -148,9 +149,10 @@
  # Plotting the time series (data input) and the heat map (correlations)
  #---------------------------------------------------------------------#
  # Plot data (plot 1)
+ to_ylim <- range(range(ts1), range(ts2))
  plot(ts1, t="l", col=coltsX, las=1, xlab="", ylab="", xaxt="n", 
-  yaxt="n", xaxs="i", yaxs="i", xlim=c(time(ts1)[1], time(ts1)[NL]), 
-  main=paste(varX, " vs. ", varY, sep=""), lwd=LWDtsX)
+  yaxt="n", xaxs="i", yaxs="i", xlim=c(time(ts1)[1], time(ts1)[NL]),  
+  ylim=to_ylim, main=paste(varX, " vs. ", varY, sep=""), lwd=LWDtsX)
  points(ts2, t="l", col=coltsY, las=1, xlab="", ylab="", lwd=LWDtsY)
  axis(1, at=seq(time.runcor[1], time.runcor[Nrun], 
   length.out=length(time.runcor)), labels=inputdata[,1])
@@ -159,8 +161,8 @@
  axis(4, at=pretty(ts2), labels=pretty(ts2), col=coltsY, las=1, 
   cex.axis=CEXAXIS, cex.lab=CEXLAB)
  mtext(1, text="Time", line=2.75, cex=CEXLAB)
- mtext(2, text=varX, col=coltsX, line=2.5, cex=CEXLAB, las=1)
- mtext(4, text=varY, col=coltsY, line=2.5, cex=CEXLAB, las=1)
+ mtext(2, text=varX, col=coltsX, line=2.5, cex=CEXLAB, las=3)
+ mtext(4, text=varY, col=coltsY, line=2.5, cex=CEXLAB, las=3)
  # -------------------------------------------------------------
  # Multi time-scale window correlation (plot 2)
  # To take into account the statistical significance in the image-plot! 

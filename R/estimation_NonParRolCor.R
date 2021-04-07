@@ -11,7 +11,7 @@
 ########################################################################
 #:: Some pieces of code come from the R "RolWinMulCor" package by      #
 #:: Josue M. Polanco-Martinez, specifically, from the function         #
-#:: "rolwincor_heatmap"  				               # 
+#:: "rolwincor_heatmap."  				               # 
 ########################################################################
 #:: The "estimation_NonParRolCor" function is used in the paper:       # 
 #:: "A non-parametric method to test the statistical significance in   # 
@@ -109,15 +109,15 @@
    variables under analysis. Thank you for using our NonParRolCor 
    package. \n")
 
- # Check 2: the time steps MUST be regular/evenly - no gaps! 
- Deltat <- diff(inputdata[,1])  # Deltat is the temporal resolution! 
- if (length(unique(Deltat)) != 1)
-  stop("\n The input data (time) have some gaps (it's irregular), please, 
-   consider to address this drawback before using NonParRolCor. We 
-   recommend you our BINCOR package and method (also in CRAN; 
-   https://cran.r-project.org/package=BINCOR), but other packages 
-   and methods can be used. Thank you much for using our NonParRolCor 
-   package. \n")
+ # "Check" 2: the time steps MUST be regular/evenly - no gaps! 
+ #Deltat <- diff(inputdata[,1])  # Deltat is the temporal resolution! 
+ #if (length(unique(Deltat)) != 1)
+  cat("\n W A R N I N G: The input data must be regular (evenly spaced 
+   time). Otherwise, please, consider to address this drawback before 
+   using NonParRolCor. We recommend you our BINCOR package and method 
+   (also in CRAN; https://cran.r-project.org/package=BINCOR), but other 
+   packages and methods can be used. Thank you so much for using our 
+   NonParRolCor package. \n")
 
  #######################################################################
  # Check 3.1: if Align="center" only estimate windows of the form 2p + 1
@@ -139,9 +139,9 @@
  #######################################################################
  # Check 4: removing linear trend - if rmltrd=TRUE
  if(isTRUE(rmltrd)) {
-  ts1.tmp   <- cbind(inputdata[ ,1], c(pracma::detrend(inputdata[ ,2])))
-  ts2.tmp   <- cbind(inputdata[ ,2], c(pracma::detrend(inputdata[ ,3])))
-  inputdata <- cbind(ts1.tmp[ ,1], ts1.tmp[,2], ts2.tmp[ ,2])  
+  ts1.tmp   <- cbind(inputdata[,1], c(pracma::detrend(inputdata[,2])))
+  ts2.tmp   <- cbind(inputdata[,1], c(pracma::detrend(inputdata[,3])))
+  inputdata <- cbind(ts1.tmp[,1], ts1.tmp[,2], ts2.tmp[,2])  
  } 
 
  # Check 5: scaling data: [X_i - mean(X_i)]/sd(X-i), mean=0 & sd=1
@@ -153,11 +153,12 @@
  #---------------------------------------------------------------------- 
  # 		Transforming input data to time series object 
  #---------------------------------------------------------------------- 
- NL  <- dim(inputdata)[1]
- ts1 <- ts(inputdata[,2], start=inputdata[1,1], end=inputdata[NL,1], 
-  	   deltat=unique(Deltat))
- ts2 <- ts(inputdata[,3], start=inputdata[1,1], end=inputdata[NL,1], 
-	   deltat=unique(Deltat))
+ NL   <- dim(inputdata)[1]
+ freq <- length((inputdata[,1]))/length(unique(inputdata[,1]))
+ ts1  <- ts(inputdata[,2], start=c(inputdata[1,1],1), 
+            end=c(inputdata[NL,1],freq), deltat=1/freq)
+ ts2  <- ts(inputdata[,3], start=c(inputdata[1,1],1), 
+	    end=c(inputdata[NL,1],freq), deltat=1/freq)
 
  time.runcor <- time(ts1)
  Nrun        <- length(time.runcor)   
@@ -215,14 +216,14 @@
  #----------------------------------------------------------------------
  # 	Array to save the correlation coefficients and CRITVAL 
  #----------------------------------------------------------------------
- the_matrixCOR     <- array(NA, c(nwin, NL-2)) # cor. coefficients 
- CRITVAL  <- array(NA, c(nwin, 2)) # critical of maximum correlation
+ the_matrixCOR  <- array(NA, c(nwin, NL-2)) # cor. coefficients 
+ CRITVAL        <- array(NA, c(nwin, 2))    # critical of maximum correlation
  
  #############	        Auxiliary   function              ##############
  # Function to estimate the correlation coefficients 
  cor_pval.fun <- function(ts1, ts2){
   res_estim   <- cor.test(ts1, ts2, method=CorMethod)
-  c(correlation=res_estim$estimate, p.value=res_estim$p.value)
+  c(correlation=res_estim$estimate)
  }
 
  ############# To declare the number of cores to be used  ##############  
@@ -266,7 +267,7 @@
   }
  
   #####################################################################
-  the_matrixCOR[w,left_win:(Nrun-righ_win)]     <- cor_pval_run[1,] 
+  the_matrixCOR[w,left_win:(Nrun-righ_win)] <- cor_pval_run 
 
  }
  #############	END:	The big-for 	#############

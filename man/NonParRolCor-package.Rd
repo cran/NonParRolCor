@@ -35,8 +35,8 @@ set) time series to exemplify its use.
 \tabular{ll}{
 Package: \tab NonParRolCor\cr
 Type: \tab Package\cr
-Version: \tab 0.4\cr
-Date: \tab 2020-03-29\cr
+Version: \tab 0.6\cr
+Date: \tab 2020-04-06\cr
 License: \tab GPL (>= 2) \cr
 LazyLoad: \tab yes\cr
 }

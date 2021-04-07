@@ -75,13 +75,13 @@ Polanco-Martínez, J. M. (2020). NonParRolCor: an R package for estimating rolli
  # WARNING: MCSim=2, it's just to test this example! 
  MCSim <- 2 
  Np    <- 2  # Number of cores 
- X_Y <- estimation_NonParRolCor(syntheticdata, CorMethod="pearson", 
-                   typewidthwin=TYPEWIDTHWIN, widthwin_1=19,
-                   widthwin_N=61, Align="center", rmltrd=TRUE, 
+ X_Y <- estimation_NonParRolCor(syntheticdata[1:350,], CorMethod="pearson", 
+                   typewidthwin=TYPEWIDTHWIN, widthwin_1=29,
+                   widthwin_N=51, Align="center", rmltrd=TRUE, 
                    Scale=TRUE, MCSim=MCSim, Np=Np)
- heatmap_NonParRolCor(syntheticdata, X_Y$matcor, X_Y$CRITVAL, 
+ heatmap_NonParRolCor(syntheticdata[1:350,], X_Y$matcor, X_Y$CRITVAL, 
                    Rwidthwin=X_Y$Windows, typewidthwin=TYPEWIDTHWIN, 
-                   widthwin_1=19, widthwin_N=61)
+                   widthwin_1=29, widthwin_N=51)
  }
 
 \keyword{plot_time_series}
