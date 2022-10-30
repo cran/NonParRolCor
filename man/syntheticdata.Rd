@@ -10,8 +10,8 @@ The data set \code{\link{syntheticdata}} contains three columns: the first one a
 \format{One file in ASCII format containing three columns and 500 rows, columns are separated by spaces. 
 }
 \source{
-Author's own production (Josué M. Polanco-Martínez) based on: mpiktas (<URL: \url{https://stats.stackexchange.com/users/2116/mpiktas}>). How to simulate two correlated AR(1) time series?, Cross Validated. (2013). <URL: \url{https://stats.stackexchange.com/q/71831}> (version: 2013-10-03).\cr
+Author's own production (Josué M. Polanco-Martínez) based on: mpiktas (<URL: \url{https://stats.stackexchange.com/users/2116/mpiktas/}>). How to simulate two correlated AR(1) time series?, Cross Validated. (2013). <URL: \url{https://stats.stackexchange.com/q/71831/}> (version: 2013-10-03).\cr
 
-Polanco-Martínez, J. M. and López-Martínez, J.M. (2021). A non-parametric method to test the statistical significance in rolling window correlations, and applications to ecological time series. Submitted to Ecological Informatics (2021). 
+Polanco-Martínez, J. M. and López-Martínez, J.M. (2021). A non-parametric method to test the statistical significance in rolling window correlations, and applications to ecological time series, Ecological Informatics 60, 101379. <URL: \doi{10.1016/j.ecoinf.2021.101379}>. 
 } 
 \keyword{synthetic_dataset}

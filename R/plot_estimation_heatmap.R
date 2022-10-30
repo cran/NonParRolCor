@@ -1,24 +1,21 @@
 ########################################################################
-#:: "heatmap_NonParRolCor" function from the R package NonParRolCor    #
+#: "plot_rolcor_estim_heatmap" function from the R package NonParRolCor#
 ########################################################################
-#:: The function "heatmap_NonParRolCor" plot the time series under     #
+#:: The function "plot_rolcor_estim_heatmap" plot the time series under#
 #:: study and a heat map of the rolling window correlation coefficients#
 #:: and its statistical significance that is estimated through a       #
 #:: non-parametric computing-intensive method. Methods inspired/derived#
 #:: from R. Telford (2013):                                            #        
-#:: <https://quantpalaeo.wordpress.com/2013/01/04//>                   #
-#:: and Polanco-Martinez, J.M. (2020), Ecological Informatics 60,      #
-#:: 101163, https://doi.org/10.1016/j.ecoinf.2020.101163	       #
+#:: <https://quantpalaeo.wordpress.com/2013/01/04//> and from Polanco- #
+#:: Martinez & Lopez-Martinez (2021), "A non-parametric method to test # 
+#:: the statistical significance in rolling window correlations, and   #
+#:: applications to ecological time series", Ecological Informatics 64,# 
+#:: 101379, https://doi.org/10.1016/j.ecoinf.2021.101379               #
 ########################################################################
 #:: Some pieces of code come from the R "RolWinMulCor" package by      #
-#:: Josue M. Polanco-Martinez, specifically, from the function         #
-#:: "plot_heatmap.R"  				                       # 
-########################################################################
-#:: The heatmap_NonParRolCor function is used in the paper: "A         #
-#:: non-parametric method to test the statistical significance in      # 
-#:: rolling window correlations, and applications to ecological time   # 
-#:: series" By Josue M. Polanco-Martinez (josue.m.polanco@gmail.com)   # 
-#:: and José Luis López-Martínez (jose.lopez@correo.uady.mx)           #
+#:: Josue M. Polanco-Martinez (2020, Ecological Informatics 60, 101163)# 
+#:: https://doi.org/10.10162/j.ecoinf.2020.101163, specifically, from  # 
+#:: the "plot_heatmap.R" function.		                       # 
 ########################################################################
 
 ########################################################################
@@ -27,7 +24,7 @@
 #:: The parallelized adaptation was carried out by José L.             #
 #:: López-Martínez, Email: jose.lopez@correo.uady.mx                   #
 ########################################################################
-#   Copyright (C) 2021 by Josué M. Polanco-Martínez and 	       #
+#   Copyright (C) 2021/2022 by Josué M. Polanco-Martínez and 	       #
 #   José L. López-Martínez            	                               #
 #   This file/code is part of the R package NonParRolCor               #
 ########################################################################
@@ -48,11 +45,11 @@
 #
 ########################################################################
 
- heatmap_NonParRolCor <- function(inputdata, corcoefs, CRITVAL, 
-                          Rwidthwin="", typewidthwin="", widthwin_1=3, 
-                          widthwin_N=dim(inputdata)[1], varX="X", 
-                          varY="Y", coltsX="black", coltsY="blue", 
-                          LWDtsX=1, LWDtsY=1, CEXLAB=1.15, CEXAXIS=1.05) 
+ plot_rolcor_estim_heatmap <- function(inputdata, corcoefs, CRITVAL, 
+                               Rwidthwin="", typewidthwin="", widthwin_1=3, 
+                               widthwin_N=dim(inputdata)[1], varX="X", 
+                               varY="Y", coltsX="black", coltsY="blue", 
+                               LWDtsX=1, LWDtsY=1, CEXLAB=1.15, CEXAXIS=1.05) 
 
  { # Open the main function
 
@@ -200,7 +197,7 @@
     labels=to_at_CASE2, cex.axis=0.95*CEXAXIS, las=1)
   }
  mtext(1, text="Time", line=2.75, cex=CEXLAB)
- mtext(2, text="Time-scales", line=3.35, cex=CEXLAB)
+ mtext(2, text="Window-length (time-scales)", line=3.35, cex=CEXLAB)
  # -------------------------------------------------------------
  # Colorbar (plot 3) 
  image(z=t(rangebar), axes=FALSE, col=Palette, frame.plot=TRUE,

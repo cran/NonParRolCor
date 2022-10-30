@@ -1,23 +1,20 @@
 ########################################################################
-#:: "estimation_NonParRolCor" function from the R package NonParRolCor #
+#:: "rolcor_estim_heatmap" function from the R package NonParRolCor    #
 ########################################################################
-#:: The function "estimation_NonParRolCor" estimates the statistical   #
-#:: significance of rolling window correlation coefficients through a  # 
-#:: non-parametric computing-intensive method. Methods inspired/derived#
-#:: from R. Telford (2013):                                            # 
-#:: <https://quantpalaeo.wordpress.com/2013/01/04/>                    #  
-#:: and Polanco-Martinez, J.M. (2020), Ecological Informatics 60,      # 
-#:: 101163, https://doi.org/10.1016/j.ecoinf.2020.101163	       #
+#:: The function "rolcor_estim_heatmap" estimates the rolling window   #
+#:: correlation for several window-lengths and their statistical       #
+#:: significance through a non-parametric computing-intensive method.  #
+#:: Methods inspired/derived from R. Telford (2013):                   #
+#:: <https://quantpalaeo.wordpress.com/2013/01/04/> and from Polanco-  #  
+#:: Martinez & Lopez-Martinez (2021), "A non-parametric method to test # 
+#:: the statistical significance in rolling window correlations, and   #
+#:: applications to ecological time series", Ecological Informatics 64,# 
+#:: 101379, https://doi.org/10.1016/j.ecoinf.2021.101379               #
 ########################################################################
 #:: Some pieces of code come from the R "RolWinMulCor" package by      #
-#:: Josue M. Polanco-Martinez, specifically, from the function         #
-#:: "rolwincor_heatmap."  				               # 
-########################################################################
-#:: The "estimation_NonParRolCor" function is used in the paper:       # 
-#:: "A non-parametric method to test the statistical significance in   # 
-#:: rolling window correlations, and applications to ecological time   #
-#:: series" By Josue M. Polanco-Martinez (josue.m.polanco@gmail.com)   #
-#:: and José Luis López-Martínez (jose.lopez@correo.uady.mx)           #
+#:: Josue M. Polanco-Martinez (2020, Ecological Informatics 60, 101163)# 
+#:: https://doi.org/10.10162/j.ecoinf.2020.101163, specifically, from  # 
+#:: the "rolwincor_heatmap" function".   			       #
 ########################################################################
 
 ########################################################################
@@ -26,7 +23,7 @@
 #:: The parallelized adaptation was carried out by José L.             #
 #:: López-Martínez, Email: jose.lopez@correo.uady.mx                   #
 ########################################################################
-#   Copyright (C) 2021 by Josué M. Polanco-Martínez and 	       #
+#   Copyright (C) 2021/2022 by Josué M. Polanco-Martínez and 	       #
 #   José L. López-Martínez            	                               #
 #   This file/code is part of the R package NonParRolCor               #
 ########################################################################
@@ -47,11 +44,11 @@
 #
 ########################################################################
 
- estimation_NonParRolCor <- function(inputdata, CorMethod="pearson", 
-                             typewidthwin="FULL", widthwin_1=3, 
-                             widthwin_N=dim(inputdata)[1], Align="center", 
-                             rmltrd=TRUE, Scale=TRUE, MCSim=1000, 
-	                     prob=0.95, Np=2)  
+ rolcor_estim_heatmap <- function(inputdata, CorMethod="pearson", 
+                            typewidthwin="FULL", widthwin_1=3, 
+                            widthwin_N=dim(inputdata)[1], Align="center", 
+                            rmltrd=TRUE, Scale=TRUE, MCSim=1000, 
+	                    prob=0.95, Np=2)  
 
  { # Open the main function
 

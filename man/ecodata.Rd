@@ -18,7 +18,7 @@ NAO index, <URL: \url{https://psl.noaa.gov/data/correlation/nao.data}>, accessed
 
 Polanco, J., Ganzedo, U., Sáenz, J., Caballero-Alfonso, A. M., & Castro-Hernández, J. J. (2011). Wavelet analysis of correlation among Canary Islands octopus captures per unit effort, sea-surface temperatures and the North Atlantic Oscillation. Fisheries Research, 107(1-3), 177-183. <URL: \doi{10.1016/j.fishres.2010.10.019}>. \cr
 
-Polanco-Martínez, J.M. (2012). Aplicación de técnicas estadísticas en el estudio de fenómenos ambientales y ecosistémicos, Ph.D. thesis, University of Basque Country, Spain. <URL: \url{https://addi.ehu.es/handle/10810/11295}>. 
+Polanco-Martínez, J.M. (2012). Aplicación de técnicas estadísticas en el estudio de fenómenos ambientales y ecosistémicos, Ph.D. thesis, University of Basque Country, Spain. <URL: \url{https://addi.ehu.es/handle/10810/11295/}>. 
 }
 \keyword{ecological_dataset}
 
